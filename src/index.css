@@ -25,12 +25,31 @@ h1 {
   border-bottom: 9px double aquamarine;
 }
 
-.Taskbar {
+.Navbar {
   background-color: lightgray;
-  padding: 5px;
+  padding: 8px;
   text-align: right;
 }
 
 .Home {
   border-top: 9px double aquamarine;
+}
+
+.Login {
+  border-top: 9px double aquamarine;
+}
+
+.Navbar a {
+  margin-left: 8px;
+  padding: 3px;
+  vertical-align: middle;
+  border: 1px solid black;
+  text-decoration: none;
+  border-radius: 5px;
+  color: black;
+  background-color: aliceblue;
+}
+
+.Navbar a:hover {
+  background-color:gray;
 }
