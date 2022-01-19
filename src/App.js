@@ -1,39 +1,27 @@
-import React, { useState } from "react";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import { Auth } from "aws-amplify";
+import React from "react";
+import { BrowserRouter as Router } from "react-router-dom";
+import { useAuth0 } from "@auth0/auth0-react";
 import Header from "./components/Header";
 import Home from "./components/Home";
 import LoginButton from "./components/LoginButton";
+import LogoutButton from "./components/LogoutButton";
 
 function App() {
-  const [isAuthenticated, userHasAuthenticated] = useState(false);
-
-  async function handleLogout() {
-    await Auth.signOut();
-    userHasAuthenticated(false);
-  }
+  const { isAuthenticated, user } = useAuth0();
 
   return (
     <Router>
       <div className="app">
         <Header />
         <div className="navbar">
-          <LoginButton />
-          {/* <LinkContainer to="/">
-            <Nav.Link>Home</Nav.Link>
-          </LinkContainer>
           {isAuthenticated ? (
-            <Nav.Link onClick={handleLogout}>Logout</Nav.Link>
-          ) : (
             <>
-              <LinkContainer to="/signup">
-                <Nav.Link>Signup</Nav.Link>
-              </LinkContainer>
-              <LinkContainer to="/login">
-                <Nav.Link>Login</Nav.Link>
-              </LinkContainer>
+              <p>{user.name}</p>
+              <LogoutButton />
             </>
-          )} */}
+          ) : (
+            <LoginButton />
+          )}
         </div>
         <Home />
       </div>

@@ -43,10 +43,16 @@ button {
   border-bottom: 9px double aquamarine;
 }
 
+.main {
+  border-top: 9px double aquamarine;
+  text-align: center;
+}
+
 .navbar {
   background-color: lightgray;
   padding: 8px;
-  text-align: right;
+  flex-direction: row-reverse;
+  display: flex;
 }
 
 .navbar button {
@@ -65,7 +71,7 @@ button {
   cursor: pointer;
 }
 
-.main {
-  border-top: 9px double aquamarine;
-  text-align: center;
+.navbar p {
+  margin: 5px;
+  font-style: italic;
 }
