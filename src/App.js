@@ -3,11 +3,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { Auth } from "aws-amplify";
 import Header from "./components/Header";
 import Home from "./components/Home";
-import Login from "./components/Login";
-import { AppContext } from "./lib/contextLib";
-import { LinkContainer } from "react-router-bootstrap";
-import { Nav } from "react-bootstrap";
-import Signup from "./components/Signup";
+import LoginButton from "./components/LoginButton";
 
 function App() {
   const [isAuthenticated, userHasAuthenticated] = useState(false);
@@ -19,10 +15,11 @@ function App() {
 
   return (
     <Router>
-      <div className="App">
+      <div className="app">
         <Header />
-        <div className="Navbar">
-          <LinkContainer to="/">
+        <div className="navbar">
+          <LoginButton />
+          {/* <LinkContainer to="/">
             <Nav.Link>Home</Nav.Link>
           </LinkContainer>
           {isAuthenticated ? (
@@ -36,15 +33,9 @@ function App() {
                 <Nav.Link>Login</Nav.Link>
               </LinkContainer>
             </>
-          )}
+          )} */}
         </div>
-        <AppContext.Provider value={{ isAuthenticated, userHasAuthenticated }}>
-          <Routes>
-            <Route path="/" exact element={<Home />}></Route>
-            <Route path="/login" exact element={<Login />}></Route>
-            <Route path="/signup" exact element={<Signup />}></Route>
-          </Routes>
-        </AppContext.Provider>
+        <Home />
       </div>
     </Router>
   );

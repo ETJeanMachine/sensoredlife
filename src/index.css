@@ -13,33 +13,43 @@ h1 {
   margin: 0px;
 }
 
-.App {
+input {
+  border: 2px solid lightslategrey;
+  border-radius: 4px;
+  width: 10%;
+  padding: 3px;
+  text-align: center;
+}
+
+label {
+  font-weight: bold;
+  font-style: italic;
+  display: block;
+}
+
+button {
+  margin: 5px;
+}
+
+.app {
   margin: 20px;
   background-color: whitesmoke;
   border-radius: 25px;
   border: 3px solid aquamarine;
 }
 
-.Header {
+.header {
   padding: 5px;
   border-bottom: 9px double aquamarine;
 }
 
-.Navbar {
+.navbar {
   background-color: lightgray;
   padding: 8px;
   text-align: right;
 }
 
-.Home {
-  border-top: 9px double aquamarine;
-}
-
-.Login {
-  border-top: 9px double aquamarine;
-}
-
-.Navbar a {
+.navbar a {
   margin-left: 8px;
   padding: 3px;
   vertical-align: middle;
@@ -50,6 +60,11 @@ h1 {
   background-color: aliceblue;
 }
 
-.Navbar a:hover {
-  background-color:gray;
+.navbar a:hover {
+  background-color: gray;
+}
+
+.main {
+  border-top: 9px double aquamarine;
+  text-align: center;
 }
