@@ -33,7 +33,16 @@ function Anime() {
         onChange={(event) => search(event.target.value)}
       />
       {anime && anime.length > 0 && query ? (
-        anime.map((ani) => <li>{ani.title}</li>)
+        <table>
+          {anime.map((ani) => (
+            <tr>
+              <td>{ani.title}</td>{" "}
+              <td>
+                <button>+</button>
+              </td>
+            </tr>
+          ))}
+        </table>
       ) : (
         <h4>No Anime found</h4>
       )}

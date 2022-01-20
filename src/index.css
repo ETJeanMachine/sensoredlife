@@ -8,6 +8,26 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+button {
+  margin: 5px;
+}
+
+button {
+  margin-left: 8px;
+  padding: 3px;
+  vertical-align: middle;
+  border: 1px solid black;
+  text-decoration: none;
+  border-radius: 5px;
+  color: black;
+  background-color: aliceblue;
+}
+
+button:hover {
+  background-color: gray;
+  cursor: pointer;
+}
+
 h1 {
   text-align: center;
   margin: 0px;
@@ -32,8 +52,8 @@ label {
   display: block;
 }
 
-button {
-  margin: 5px;
+table {
+  
 }
 
 .app {
@@ -61,22 +81,6 @@ button {
   display: flex;
 }
 
-.navbar button {
-  margin-left: 8px;
-  padding: 3px;
-  vertical-align: middle;
-  border: 1px solid black;
-  text-decoration: none;
-  border-radius: 5px;
-  color: black;
-  background-color: aliceblue;
-}
-
-.navbar button:hover {
-  background-color: gray;
-  cursor: pointer;
-}
-
 .navbar p {
   margin: 5px;
   font-style: italic;
@@ -88,4 +92,7 @@ button {
 
 .search div {
   width: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
 }

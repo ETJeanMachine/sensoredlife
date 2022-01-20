@@ -12,7 +12,10 @@ function Books() {
   const search = async (key) => {
     setQuery(key);
     console.log(query);
-    const url = format("https://www.googleapis.com/books/v1/volumes?q={0}&maxResults=5", key);
+    const url = format(
+      "https://www.googleapis.com/books/v1/volumes?q={0}&maxResults=5",
+      key
+    );
     const response = await fetch(url);
     const info = await response.json();
     try {
@@ -32,7 +35,16 @@ function Books() {
         onChange={(event) => search(event.target.value)}
       />
       {books && books.length > 0 && query ? (
-        books.map((book) => <li>{book.volumeInfo.title}</li>)
+        <table>
+          {books.map((book) => (
+            <tr>
+              <td>{book.volumeInfo.title}</td>{" "}
+              <td>
+                <button>+</button>
+              </td>
+            </tr>
+          ))}
+        </table>
       ) : (
         <h4>No books found</h4>
       )}
