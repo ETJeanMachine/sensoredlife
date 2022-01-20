@@ -3,10 +3,8 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { initializeApp } from "firebase/app";
 import {
   getFirestore,
-  collection,
   doc,
   getDoc,
-  addDoc,
   setDoc,
 } from "firebase/firestore";
 import { format } from "react-string-format";
@@ -24,14 +22,37 @@ function AddButton(props) {
   const { user } = useAuth0();
   const app = initializeApp(firebaseConfig);
   const db = getFirestore(app);
-
+  
   async function addToDb() {
-    const userDocRef = doc(db, "users", user.email);
-    const userDoc = await getDoc(userDocRef);
-    // First thing we do is check if the user is in the database yet or not. If not, we have to add them.
-    if (!userDoc.exists()) {
-      await setDoc(doc(db, "users", user.email), {});
+    // For parsing the item's info that we're adding to the database.
+    const info = props.info;
+    var id;
+    var title;
+    switch (props.type) {
+      case "anime":
+        id = info.mal_id + "";
+        title = info.title;
+        break;
+      case "books":
+        id = info.id;
+        title = info.volumeInfo.title;
+        break;
+      default:
+        console.error("Something terrible happened.");
+        return <button onClick={() => addToDb()}>+</button>;
     }
+    // This is where we would check to see if the item is already in the database; and replace the button with a RemoveButton instead.
+    // TODO
+    // Now we add and merge the document to the collection we want (it also creates a new user if they don't exist already.).
+    const path = format("users/{0}/{1}", user.email, props.type);
+    console.log(id);
+    await setDoc(
+      doc(db, path, id),
+      {
+        title: title,
+      },
+      { merge: true }
+    );
   }
 
   return <button onClick={() => addToDb()}>+</button>;
