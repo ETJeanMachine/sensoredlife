@@ -1,5 +1,6 @@
 import { React, useState, useEffect } from "react";
 import { format } from "react-string-format";
+import AddButton from "./AddButton";
 
 function Anime() {
   const [anime, setAnime] = useState([]);
@@ -35,7 +36,7 @@ function Anime() {
             <tr>
               <td>{ani.title}</td>{" "}
               <td>
-                <button>+</button>
+                <AddButton type="anime" info={ani} />
               </td>
             </tr>
           ))}
