@@ -1,4 +1,5 @@
 import { React, useState, useEffect } from "react";
+import { format } from "react-string-format";
 
 function Books() {
   const [books, setBooks] = useState([]);
@@ -11,12 +12,11 @@ function Books() {
   const search = async (key) => {
     setQuery(key);
     console.log(query);
-    const url =
-      "https://www.googleapis.com/books/v1/volumes?q=" + '"' + key + '"';
+    const url = format("https://www.googleapis.com/books/v1/volumes?q={0}&maxResults=5", key);
     const response = await fetch(url);
     const info = await response.json();
     try {
-      setBooks(info.items.slice(0, 5));
+      setBooks(info.items);
       console.log(books);
     } catch (e) {
       console.log(e);
