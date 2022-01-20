@@ -4,7 +4,6 @@ import { initializeApp } from "firebase/app";
 import {
   getFirestore,
   doc,
-  getDoc,
   setDoc,
 } from "firebase/firestore";
 import { format } from "react-string-format";
