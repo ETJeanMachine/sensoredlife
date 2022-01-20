@@ -39,14 +39,16 @@ function Books() {
       />
       {books && books.length > 0 && query ? (
         <table>
-          {books.map((book) => (
-            <tr>
-              <td>{book.volumeInfo.title}</td>{" "}
-              <td>
-                <AddButton type="books" info={book} />
-              </td>
-            </tr>
-          ))}
+          <tbody>
+            {books.map((book) => (
+              <tr key={book.volumeInfo.title}>
+                <td>{book.volumeInfo.title}</td>
+                <td>
+                  <AddButton type="books" info={book} />
+                </td>
+              </tr>
+            ))}
+          </tbody>
         </table>
       ) : (
         <h4>No books found</h4>

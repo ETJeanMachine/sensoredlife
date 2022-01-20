@@ -32,14 +32,16 @@ function Anime() {
       />
       {anime && anime.length > 0 && query ? (
         <table>
-          {anime.map((ani) => (
-            <tr>
-              <td>{ani.title}</td>{" "}
-              <td>
-                <AddButton type="anime" info={ani} />
-              </td>
-            </tr>
-          ))}
+          <tbody>
+            {anime.map((ani) => (
+              <tr key={ani.title}>
+                <td>{ani.title}</td>
+                <td>
+                  <AddButton type="anime" info={ani} />
+                </td>
+              </tr>
+            ))}
+          </tbody>
         </table>
       ) : (
         <h4>No Anime found</h4>
