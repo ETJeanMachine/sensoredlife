@@ -2,12 +2,15 @@ import { React, useState, useEffect } from "react";
 
 function Books() {
   const [books, setBooks] = useState([]);
+  const [query, setQuery] = useState(null);
 
   useEffect(() => {
     search();
   }, []);
 
   const search = async (key) => {
+    setQuery(key);
+    console.log(query);
     const url =
       "https://www.googleapis.com/books/v1/volumes?q=" + '"' + key + '"';
     const response = await fetch(url);
@@ -28,9 +31,11 @@ function Books() {
         placeholder="Search..."
         onChange={(event) => search(event.target.value)}
       />
-      {books.map((book) => {
-        <li>{book.volumeInfo.title}</li>;
-      })}
+      {books && books.length > 0 && query ? (
+        books.map((book) => <li>{book.volumeInfo.title}</li>)
+      ) : (
+        <h4>No books found</h4>
+      )}
     </div>
   );
 }
