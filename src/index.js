@@ -4,7 +4,27 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 import { Auth0Provider } from "@auth0/auth0-react";
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
 
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+
+const firebaseConfig = {
+  apiKey: "AIzaSyBrfqL3Daal65Ol1CaXt6AlZ2SM3j0rOUs",
+  authDomain: "sensored-life.firebaseapp.com",
+  projectId: "sensored-life",
+  storageBucket: "sensored-life.appspot.com",
+  messagingSenderId: "985352494852",
+  appId: "1:985352494852:web:fb8e5c865c7c2f58dd7a51",
+  measurementId: "G-TWKR6RBNE4",
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
 
 ReactDOM.render(
   <Auth0Provider

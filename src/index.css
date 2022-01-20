@@ -13,11 +13,16 @@ h1 {
   margin: 0px;
 }
 
+h3 {
+  margin: 3px;
+}
+
 input {
   border: 2px solid lightslategrey;
   border-radius: 4px;
-  width: 10%;
+  width: 20%;
   padding: 3px;
+  margin: 5px;
   text-align: center;
 }
 
@@ -43,8 +48,9 @@ button {
   border-bottom: 9px double aquamarine;
 }
 
-.main {
+.home {
   border-top: 9px double aquamarine;
+  width: 100%;
   text-align: center;
 }
 
@@ -74,4 +80,12 @@ button {
 .navbar p {
   margin: 5px;
   font-style: italic;
+}
+
+.search {
+  display: flex;
+}
+
+.search div {
+  width: 100%;
 }

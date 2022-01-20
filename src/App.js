@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter as Router } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 import Header from "./components/Header";
-import Home from "./components/Home";
+import Home from "./views/Home";
 import LoginButton from "./components/LoginButton";
 import LogoutButton from "./components/LogoutButton";
 
