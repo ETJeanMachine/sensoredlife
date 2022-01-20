@@ -35,27 +35,21 @@ function AddButton(props) {
         break;
       default:
         console.error("Something terrible happened.");
-        return <button onClick={() => addToDb()}>+</button>;
+        return;
     }
-    // This is where we check to see if the item is already in the database; and replace the button with a RemoveButton instead.
+    // This is where we check to see if the item is already in the database; and alert the user if they can't add twice.
     const docRef = doc(db, path, id);
     const docSnap = await getDoc(docRef);
     if (docSnap.exists()) {
       // Temporary.
-      return (
-        <button onClick={alert("Already in list; cannot add again!")}>+</button>
-      );
+      alert("Already in list; cannot add again!");
+      return;
     }
     // Now we add and merge the document to the collection we want (it also creates a new user if they don't exist already.).
     console.log(id);
-    await setDoc(
-      docRef,
-      {
-        title: title,
-      },
-      { merge: true }
-    );
+    await setDoc(docRef, { title: title }, { merge: true });
   }
+
   return <button onClick={() => addToDb()}>+</button>;
 }
 
