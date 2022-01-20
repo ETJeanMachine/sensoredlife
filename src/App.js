@@ -1,29 +1,18 @@
 import React from "react";
-import { BrowserRouter as Router } from "react-router-dom";
-import { useAuth0 } from "@auth0/auth0-react";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Header from "./components/Header";
 import Home from "./views/Home";
-import LoginButton from "./components/LoginButton";
-import LogoutButton from "./components/LogoutButton";
+import Lists from "./views/Lists"
 
 function App() {
-  const { isAuthenticated, user } = useAuth0();
-
   return (
     <Router>
       <div className="app">
         <Header />
-        <div className="navbar">
-          {isAuthenticated ? (
-            <>
-              <p>{user.name}</p>
-              <LogoutButton />
-            </>
-          ) : (
-            <LoginButton />
-          )}
-        </div>
-        <Home />
+        <Routes>
+          <Route path="/" element={<Home />}></Route>
+          <Route path="/lists" element={<Lists />}></Route>
+        </Routes>
       </div>
     </Router>
   );
