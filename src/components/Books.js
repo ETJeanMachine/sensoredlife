@@ -1,9 +1,31 @@
 import { React, useState, useEffect } from "react";
 import { format } from "react-string-format";
+import { initializeApp } from 'firebase/app';
+import { getFirestore, doc, getDoc } from 'firebase/firestore';
+import { useAuth0 } from "@auth0/auth0-react";
+
 
 function Books() {
+  const { user } = useAuth0();
+  const firebaseConfig = {
+    apiKey: "AIzaSyBrfqL3Daal65Ol1CaXt6AlZ2SM3j0rOUs",
+    authDomain: "sensored-life.firebaseapp.com",
+    projectId: "sensored-life",
+    storageBucket: "sensored-life.appspot.com",
+    messagingSenderId: "985352494852",
+    appId: "1:985352494852:web:fb8e5c865c7c2f58dd7a51",
+    measurementId: "G-TWKR6RBNE4",
+  };
   const [books, setBooks] = useState([]);
   const [query, setQuery] = useState(null);
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+
+  async function addToDb(key) {
+    const docRef = doc(db, 'lists', user.email);
+    const docSnap = await getDoc(docRef);
+    console.log(docSnap.data());
+  }
 
   useEffect(() => {
     search();
@@ -11,7 +33,6 @@ function Books() {
 
   const search = async (key) => {
     setQuery(key);
-    console.log(query);
     const url = format(
       "https://www.googleapis.com/books/v1/volumes?q={0}&maxResults=5",
       key
@@ -20,7 +41,6 @@ function Books() {
     const info = await response.json();
     try {
       setBooks(info.items);
-      console.log(books);
     } catch (e) {
       console.log(e);
     }
@@ -40,7 +60,7 @@ function Books() {
             <tr>
               <td>{book.volumeInfo.title}</td>{" "}
               <td>
-                <button>+</button>
+                <button onClick={() => addToDb(book)}>+</button>
               </td>
             </tr>
           ))}

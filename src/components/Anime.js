@@ -11,14 +11,11 @@ function Anime() {
 
   const search = async (key) => {
     setQuery(key);
-    console.log(query);
     const url = format("https://api.jikan.moe/v4/anime?q={0}&sfw&limit=5", key);
     const response = await fetch(url);
     const info = await response.json();
     try {
       setAnime(info.data);
-      console.log(info);
-      console.log(anime);
     } catch (e) {
       console.log(e);
     }
