@@ -3,12 +3,13 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { initializeApp } from "firebase/app";
 import {
   getFirestore,
+  collection,
   doc,
   getDoc,
+  addDoc,
   setDoc,
-  query,
-  where,
 } from "firebase/firestore";
+import { format } from "react-string-format";
 
 function AddButton(props) {
   const firebaseConfig = {
@@ -24,7 +25,14 @@ function AddButton(props) {
   const app = initializeApp(firebaseConfig);
   const db = getFirestore(app);
 
-  async function addToDb() {}
+  async function addToDb() {
+    const userDocRef = doc(db, "users", user.email);
+    const userDoc = await getDoc(userDocRef);
+    // First thing we do is check if the user is in the database yet or not. If not, we have to add them.
+    if (!userDoc.exists()) {
+      await setDoc(doc(db, "users", user.email), {});
+    }
+  }
 
   return <button onClick={() => addToDb()}>+</button>;
 }
