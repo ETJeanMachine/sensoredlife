@@ -1,42 +1,19 @@
 import { React, useState, useEffect } from "react";
 import { format } from "react-string-format";
-import { initializeApp } from 'firebase/app';
-import { getFirestore, doc, getDoc, setDoc } from 'firebase/firestore';
-import { useAuth0 } from "@auth0/auth0-react";
-
+import AddButton from "./AddButton";
 
 function Books() {
-  const { user } = useAuth0();
-  const firebaseConfig = {
-    apiKey: "AIzaSyBrfqL3Daal65Ol1CaXt6AlZ2SM3j0rOUs",
-    authDomain: "sensored-life.firebaseapp.com",
-    projectId: "sensored-life",
-    storageBucket: "sensored-life.appspot.com",
-    messagingSenderId: "985352494852",
-    appId: "1:985352494852:web:fb8e5c865c7c2f58dd7a51",
-    measurementId: "G-TWKR6RBNE4",
-  };
   const [books, setBooks] = useState([]);
   const [query, setQuery] = useState(null);
-  const app = initializeApp(firebaseConfig);
-  const db = getFirestore(app);
-
-  async function addToDb(key) {
-    const docRef = doc(db, 'lists', user.email);
-    const docSnap = await getDoc(docRef);
-    if (!docSnap.exists()) {
-      // We need to create a new document if it doesn't exist.
-      await setDoc(doc(db, "lists", user.email), {
-        key: "book"
-      });
-    }
-    
-  }
 
   useEffect(() => {
     search();
   }, []);
 
+  /**
+   * Function that searches for a given string of input from the google database.
+   * @param {*} key The input string that the user typed.
+   */
   const search = async (key) => {
     setQuery(key);
     const url = format(
@@ -66,7 +43,7 @@ function Books() {
             <tr>
               <td>{book.volumeInfo.title}</td>{" "}
               <td>
-                <button onClick={() => addToDb(book.id)}>+</button>
+                <AddButton type="book" info={book} />
               </td>
             </tr>
           ))}
