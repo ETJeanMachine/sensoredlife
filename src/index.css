@@ -53,7 +53,22 @@ label {
 }
 
 table {
-  
+  margin: 5px;
+  border: 1px solid gray;
+  border-collapse: collapse;
+}
+
+td {
+  margin: 0px;
+  border: 1px solid grey;
+}
+
+tr:nth-child(even) {
+  background-color: lightgray;
+}
+
+tr:hover {
+  background-color: white;
 }
 
 .app {
