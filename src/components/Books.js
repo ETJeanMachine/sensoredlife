@@ -43,7 +43,7 @@ function Books() {
             <tr>
               <td>{book.volumeInfo.title}</td>{" "}
               <td>
-                <AddButton type="book" info={book} />
+                <AddButton type="books" info={book} />
               </td>
             </tr>
           ))}
