@@ -1,8 +1,14 @@
-import React from 'react';
+import React from "react";
 import { useAuth0 } from "@auth0/auth0-react";
-import { initializeApp } from 'firebase/app';
-import { getFirestore, doc, getDoc, setDoc, query, where } from 'firebase/firestore';
-
+import { initializeApp } from "firebase/app";
+import {
+  getFirestore,
+  doc,
+  getDoc,
+  setDoc,
+  query,
+  where,
+} from "firebase/firestore";
 
 function AddButton(props) {
   const firebaseConfig = {
@@ -17,11 +23,9 @@ function AddButton(props) {
   const { user } = useAuth0();
   const app = initializeApp(firebaseConfig);
   const db = getFirestore(app);
-  
-  async function addToDb() {
-    
-  }
-  
+
+  async function addToDb() {}
+
   return <button onClick={() => addToDb()}>+</button>;
 }
 
