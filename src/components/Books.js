@@ -1,7 +1,7 @@
 import { React, useState, useEffect } from "react";
 import { format } from "react-string-format";
 import { initializeApp } from 'firebase/app';
-import { getFirestore, doc, getDoc } from 'firebase/firestore';
+import { getFirestore, doc, getDoc, setDoc } from 'firebase/firestore';
 import { useAuth0 } from "@auth0/auth0-react";
 
 
@@ -24,7 +24,13 @@ function Books() {
   async function addToDb(key) {
     const docRef = doc(db, 'lists', user.email);
     const docSnap = await getDoc(docRef);
-    console.log(docSnap.data());
+    if (!docSnap.exists()) {
+      // We need to create a new document if it doesn't exist.
+      await setDoc(doc(db, "lists", user.email), {
+        key: "book"
+      });
+    }
+    
   }
 
   useEffect(() => {
@@ -60,7 +66,7 @@ function Books() {
             <tr>
               <td>{book.volumeInfo.title}</td>{" "}
               <td>
-                <button onClick={() => addToDb(book)}>+</button>
+                <button onClick={() => addToDb(book.id)}>+</button>
               </td>
             </tr>
           ))}
