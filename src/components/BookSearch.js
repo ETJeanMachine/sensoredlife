@@ -31,7 +31,7 @@ function BookSearch() {
 
   return (
     <div>
-      <h3>BOOKS</h3>
+      <h3>BOOK SEARCH</h3>
       <input
         type="text"
         placeholder="Search..."

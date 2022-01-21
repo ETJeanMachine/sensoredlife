@@ -24,7 +24,7 @@ function AnimeSearch() {
 
   return (
     <div>
-      <h3>ANIME</h3>
+      <h3>ANIME SEARCH</h3>
       <input
         type="search"
         placeholder="Search..."
