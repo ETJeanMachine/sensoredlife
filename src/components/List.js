@@ -45,7 +45,7 @@ function List(props) {
             <tr key={doc.id}>
               <td>{doc.data().title}</td>
               <td>
-                <RemoveButton />
+                <RemoveButton docSnap = {doc}/>
               </td>
             </tr>
           ))}
