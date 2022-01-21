@@ -26,35 +26,38 @@ function List(props) {
   const app = initializeApp(firebaseConfig);
   const db = getFirestore(app);
   const path = format("users/{0}/{1}", user.email, props.type);
-  const bookRef = collection(db, path);
+  const ref = collection(db, path);
 
-  const [docs, setDocs] = useState([]);
+  const [docSnaps, setDocSnaps] = useState([]);
   // querying all of our docs.
   const bookQuery = async () => {
-    const q = query(bookRef, where("title", "!=", null));
+    const q = query(ref, where("title", "!=", null));
     const docs = await getDocs(q);
-    setDocs(docs.docs);
+    setDocSnaps(docs.docs);
+    console.log();
   };
 
   return (
     <div className="list">
-      <h3>{props.type == "anime" ? "ANIME LIST" : "BOOK LIST"}</h3>
+      <h3>{props.type === "anime" ? "ANIME LIST" : "BOOK LIST"}</h3>
       <button onClick={() => bookQuery()}>Refresh/Load List</button>
-      {doc && doc.size > 0 ? (
+      {docSnaps && docSnaps.length > 0 ? (
         <table>
           <tbody>
-            {docs.map((doc) => (
-              <tr key={doc.id}>
-                <td>{doc.data().title}</td>
+            {docSnaps.map((docSnap) => (
+              <tr>
+                <td>{docSnap.data().title}</td>
                 <td>
-                  <RemoveButton docSnap={doc} />
+                  <RemoveButton docSnap={docSnap} />
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
       ) : (
-        <h4>{props.type == "anime" ? "No anime in list" : "No books in list"}</h4>
+        <h4>
+          {props.type === "anime" ? "No anime in list" : "No books in list"}
+        </h4>
       )}
     </div>
   );
