@@ -1,10 +1,8 @@
 import React from "react";
 import { useAuth0 } from "@auth0/auth0-react";
-import LoginButton from "./LoginButton";
-import LogoutButton from "./LogoutButton";
 
 function Header() {
-  const { isAuthenticated, user } = useAuth0();
+  const { isAuthenticated, user, logout, loginWithRedirect } = useAuth0();
 
   return (
     <>
@@ -15,10 +13,12 @@ function Header() {
         {isAuthenticated ? (
           <>
             <p>{user.name}</p>
-            <LogoutButton />
+            <button onClick={() => logout({ returnTo: window.location.origin })}>
+      Log Out
+    </button>
           </>
         ) : (
-          <LoginButton />
+          <button onClick={() => loginWithRedirect()}>Log In</button>
         )}
       </div>
     </>
