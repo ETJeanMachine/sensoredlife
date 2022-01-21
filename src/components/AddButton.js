@@ -41,7 +41,6 @@ function AddButton(props) {
     const docRef = doc(db, path, id);
     const docSnap = await getDoc(docRef);
     if (docSnap.exists()) {
-      // Temporary.
       alert("Already in list; cannot add again!");
       return;
     }
