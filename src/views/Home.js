@@ -12,15 +12,15 @@ function Home() {
       <div className="search">
         <BookSearch />
         <AnimeSearch />
-        <List type="books"/>
-        <List type="anime"/>
+        <List type="books" />
+        <List type="anime" />
       </div>
     </div>
   ) : (
     <div className="home">
       <p>
         This is a web application where you can log in and create a list of
-        favourite books and [something else].
+        favourite books and anime.
       </p>
       <p>
         This application was made specifically for the company Sensored Life and
