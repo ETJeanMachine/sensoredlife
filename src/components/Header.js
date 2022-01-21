@@ -14,14 +14,8 @@ function Header() {
       <div className="navbar">
         {isAuthenticated ? (
           <>
-            <div id="right">
-              <p>{user.name}</p>
-              <LogoutButton />
-            </div>
-            <div id="left">
-              <a href="/">Home</a>
-              <a href="/lists">Lists</a>
-            </div>
+            <p>{user.name}</p>
+            <LogoutButton />
           </>
         ) : (
           <LoginButton />

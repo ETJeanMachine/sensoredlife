@@ -2,28 +2,21 @@ import { React, useState, useEffect } from "react";
 import { format } from "react-string-format";
 import AddButton from "./AddButton";
 
-function Books() {
-  const [books, setBooks] = useState([]);
+function AnimeSearch() {
+  const [anime, setAnime] = useState([]);
   const [query, setQuery] = useState(null);
 
   useEffect(() => {
     search();
   }, []);
 
-  /**
-   * Function that searches for a given string of input from the google database.
-   * @param {*} key The input string that the user typed.
-   */
   const search = async (key) => {
     setQuery(key);
-    const url = format(
-      "https://www.googleapis.com/books/v1/volumes?q={0}&maxResults=5",
-      key
-    );
+    const url = format("https://api.jikan.moe/v4/anime?q={0}&sfw&limit=5", key);
     const response = await fetch(url);
     const info = await response.json();
     try {
-      setBooks(info.items);
+      setAnime(info.data);
     } catch (e) {
       console.log(e);
     }
@@ -31,30 +24,30 @@ function Books() {
 
   return (
     <div>
-      <h3>BOOKS</h3>
+      <h3>ANIME</h3>
       <input
-        type="text"
+        type="search"
         placeholder="Search..."
         onChange={(event) => search(event.target.value)}
       />
-      {books && books.length > 0 && query ? (
+      {anime && anime.length > 0 && query ? (
         <table>
           <tbody>
-            {books.map((book) => (
-              <tr key={book.volumeInfo.title}>
-                <td>{book.volumeInfo.title}</td>
+            {anime.map((ani) => (
+              <tr key={ani.title}>
+                <td>{ani.title}</td>
                 <td>
-                  <AddButton type="books" info={book} />
+                  <AddButton type="anime" info={ani} />
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
       ) : (
-        <h4>No books found</h4>
+        <h4>No Anime found</h4>
       )}
     </div>
   );
 }
 
-export default Books;
+export default AnimeSearch;

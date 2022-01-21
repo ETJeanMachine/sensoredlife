@@ -1,7 +1,7 @@
 import React from "react";
 import { useAuth0 } from "@auth0/auth0-react";
-import Books from "../components/Books";
-import Anime from "../components/Anime";
+import BookSearch from "../components/BookSearch";
+import AnimeSearch from "../components/AnimeSearch";
 
 function Home() {
   const { isAuthenticated } = useAuth0();
@@ -9,8 +9,8 @@ function Home() {
   return isAuthenticated ? (
     <div className="home">
       <div className="search">
-        <Books />
-        <Anime />
+        <BookSearch />
+        <AnimeSearch />
       </div>
     </div>
   ) : (
