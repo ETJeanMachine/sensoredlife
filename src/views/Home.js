@@ -2,8 +2,7 @@ import React from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 import BookSearch from "../components/BookSearch";
 import AnimeSearch from "../components/AnimeSearch";
-import BookList from "../components/BookList";
-import AnimeList from "../components/AnimeList";
+import List from "../components/List";
 
 function Home() {
   const { isAuthenticated } = useAuth0();
@@ -13,8 +12,8 @@ function Home() {
       <div className="search">
         <BookSearch />
         <AnimeSearch />
-        <BookList />
-        <AnimeList />
+        <List type="books"/>
+        <List type="anime"/>
       </div>
     </div>
   ) : (

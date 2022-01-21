@@ -9,9 +9,9 @@ import {
   where,
 } from "firebase/firestore";
 import { format } from "react-string-format";
-import RemoveButton from "./RemoveButton.js"
+import RemoveButton from "./RemoveButton.js";
 
-function BookList() {
+function List(props) {
   const firebaseConfig = {
     apiKey: "AIzaSyBrfqL3Daal65Ol1CaXt6AlZ2SM3j0rOUs",
     authDomain: "sensored-life.firebaseapp.com",
@@ -24,24 +24,24 @@ function BookList() {
   const { user } = useAuth0();
   const app = initializeApp(firebaseConfig);
   const db = getFirestore(app);
-  const path = format("users/{0}/books", user.email);
+  const path = format("users/{0}/{1}", user.email, props.type);
   const bookRef = collection(db, path);
 
-  const [ bookDocs, setBookDocs ] = useState([]);
+  const [bookDocs, setBookDocs] = useState([]);
   // querying all of our books.
   const bookQuery = async () => {
     const q = query(bookRef, where("title", "!=", null));
     const docs = await getDocs(q);
     setBookDocs(docs.docs);
-  }
+  };
 
   return (
     <div className="list">
-      <h3>BOOK LIST</h3>
+      {props.type == "anime" ? <h3>ANIME LIST</h3> : <h3>BOOK LIST</h3>}
       <button onClick={() => bookQuery()}>Refresh List</button>
       <table>
         <tbody>
-          {bookDocs.map(doc => (
+          {bookDocs.map((doc) => (
             <tr key={doc.id}>
               <td>{doc.data().title}</td>
               <td>
@@ -55,4 +55,4 @@ function BookList() {
   );
 }
 
-export default BookList;
+export default List;
